@@ -1,8 +1,4 @@
-const express = require("express");
-const app = express();
-var msg = require("./mod_teste");
-
-app.set("view engine", "ejs");
+const app = require("./config/server");
 
 app.get("/formulario_inclusao_noticia", function (req, res) {
   res.render("admin/form_add_noticia");
@@ -17,5 +13,5 @@ app.get("/", function (req, res) {
 });
 
 app.listen(4000, function () {
-  console.log(msg);
+  console.log("Servidor rodando com Express");
 });
