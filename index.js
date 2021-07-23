@@ -1,16 +1,13 @@
 const app = require("./config/server");
 
-app.get("/formulario_inclusao_noticia", function (req, res) {
-  res.render("admin/form_add_noticia");
-});
+const rotaNoticicas = require("./app/routes/noticias");
+rotaNoticicas(app);
 
-app.get("/noticias", function (req, res) {
-  res.render("noticias/noticias");
-});
+const rotaHome = require("./app/routes/home");
+rotaHome(app);
 
-app.get("/", function (req, res) {
-  res.render("home/index");
-});
+const rotaForm = require("./app/routes/formulario_noticia");
+rotaForm(app);
 
 app.listen(4000, function () {
   console.log("Servidor rodando com Express");
