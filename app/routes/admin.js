@@ -5,6 +5,11 @@ module.exports = function (app) {
 
   app.post("/noticia/salvar", function (req, res) {
     var noticia = req.body;
-    res.send(noticia);
+    var connection = app.config.database();
+    var noticiasModel = app.app.models.noticiasModel();
+
+    noticiasModel.setNoticia(noticia, connection, function (error, result) {
+      res.redirect("/noticias");
+    });
   });
 };
