@@ -5,6 +5,24 @@ module.exports = function (app) {
 
   app.post("/noticia/salvar", function (req, res) {
     var noticia = req.body;
+
+    req.assert("titulo", "Titulo é obrigatório").notEmpty();
+    req.assert("resumo", "Resumo é obrigatório").notEmpty().len(10, 100);
+    // req.assert('resumo', "Resumo é obrigatório").len(10,100);
+    req.assert("autor", "Autor é obrigatório").notEmpty();
+    req
+      .assert("data", "Data é obrigatória")
+      .notEmpty()
+      .isDate({ format: "YYYY-MM-DD" });
+
+    req.assert("noticia", "Noticia é obrigatória").notEmpty();
+
+    var errors = req.validationErrors();
+
+    if (errors) {
+      res.render("admin/form_add_noticia");
+      return;
+    }
     var connection = app.config.database();
     var noticiasModel = new app.app.models.noticiasModel(connection);
 
