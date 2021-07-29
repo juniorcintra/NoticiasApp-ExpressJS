@@ -7,7 +7,11 @@ module.exports = function (app) {
     var noticia = req.body;
 
     req.assert("titulo", "Titulo é obrigatório").notEmpty();
-    req.assert("resumo", "Resumo é obrigatório").notEmpty().len(10, 100);
+    req
+      .assert("resumo", "Resumo é obrigatório")
+      .notEmpty()
+      .len(10, 100)
+      .withMessage("Resumo tem que ter entre 10 e 100 caracteres");
     // req.assert('resumo', "Resumo é obrigatório").len(10,100);
     req.assert("autor", "Autor é obrigatório").notEmpty();
     req
@@ -20,7 +24,7 @@ module.exports = function (app) {
     var errors = req.validationErrors();
 
     if (errors) {
-      res.render("admin/form_add_noticia");
+      res.render("admin/form_add_noticia", { errors: errors });
       return;
     }
     var connection = app.config.database();

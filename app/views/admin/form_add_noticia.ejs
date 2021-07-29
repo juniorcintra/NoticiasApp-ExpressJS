@@ -10,6 +10,16 @@
 	<h1>Adicionar Notícia</h1>
 	<br/>
 
+	<% if (errors) { %>
+	 <ul>
+		 <% for( let i = 0; i < errors.length; i++ ) { %>
+		 <li>
+			<%= errors[i].msg%>
+		 </li>
+		 <% } %>
+	 </ul>
+	<% } %>
+
 	<form action="/noticia/salvar" method="POST">
 		<label>Titulo</label>
 		<input type="text" id="titulo" name="titulo" placeholder="Titulo da noticia"/>
