@@ -3,7 +3,10 @@ function Noticias(connection) {
 }
 
 Noticias.prototype.getNoticias = function (callback) {
-  this._connection.query("select * from noticias", callback);
+  this._connection.query(
+    "select * from noticias order by data_criacao desc",
+    callback
+  );
 };
 
 Noticias.prototype.getNoticia = function (callback) {
