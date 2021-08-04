@@ -9,9 +9,9 @@ Noticias.prototype.getNoticias = function (callback) {
   );
 };
 
-Noticias.prototype.getNoticia = function (callback) {
+Noticias.prototype.getNoticia = function (id_noticia, callback) {
   this._connection.query(
-    "select * from noticias where id_noticia = 2",
+    "select * from noticias where id_noticia = " + id_noticia.id_noticia,
     callback
   );
 };
